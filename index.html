@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Marca que JS está activo antes del primer render (evita parpadeo de los reveal) -->
+  <script>document.documentElement.classList.add('js');</script>
+
+  <!-- ===================== SEO ===================== -->
+  <title>Sonrisa Vital | Clínica Odontológica en Bogotá – Odontología sin dolor</title>
+  <meta name="description" content="Clínica odontológica Sonrisa Vital en Bogotá: ortodoncia invisible, blanqueamiento láser, diseño de sonrisa digital e implantes. Agenda tu valoración por WhatsApp." />
+  <meta name="theme-color" content="#0284c7" />
+  <link rel="canonical" href="https://www.sonrisavital.co/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sonrisa Vital | Odontología moderna sin dolor" />
+  <meta property="og:description" content="Atención especializada, tecnología avanzada y valoraciones integrales. Reserva tu cita hoy." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=80" />
+  <meta property="og:locale" content="es_CO" />
+
+  <!-- Favicon (diente en SVG inline) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦷</text></svg>" />
+
+  <!-- Datos estructurados (Rich Results de Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "name": "Sonrisa Vital",
+    "image": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=80",
+    "telephone": "+57 300 123 4567",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle 123 #45-67, Edificio Médico",
+      "addressLocality": "Bogotá",
+      "addressCountry": "CO"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
+    ],
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "500" }
+  }
+  </script>
+
+  <!-- ===================== Fuentes ===================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- ===================== Iconos ===================== -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+
+  <!-- ===================== Tailwind CSS v3 (CDN) + config ===================== -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            // Primario: azul médico / turquesa
+            brand: {
+              50:  '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0891b2', // turquesa vivo (acentos)
+              600: '#0284c7', // azul médico (acentos, íconos, gradientes)
+              700: '#0369a1', // fondos de botón con texto pequeño (contraste AA)
+              800: '#075985',
+            },
+            // Secundario: WhatsApp oficial
+            wa: {
+              400: '#25D366',
+              600: '#128C7E',
+              700: '#075E54',
+            },
+            ink: '#1E293B', // texto principal (slate-800)
+          },
+          boxShadow: {
+            soft: '0 10px 40px -12px rgba(2, 132, 199, 0.25)',
+            glow: '0 0 0 0 rgba(37, 211, 102, 0.6)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Estilos personalizados (animaciones, glass, reveal) -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-white font-sans text-ink antialiased">
+
+  <!-- Enlace de salto para usuarios de teclado / lectores de pantalla -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand-700 focus:px-4 focus:py-2 focus:text-white">
+    Saltar al contenido principal
+  </a>
+
+  <!-- =====================================================================
+       HEADER / NAVBAR (sticky + backdrop-blur)
+       ===================================================================== -->
+  <header id="navbar" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="Navegación principal">
+
+      <!-- Logo -->
+      <a href="#inicio" class="group flex items-center gap-2" aria-label="Sonrisa Vital, ir al inicio">
+        <span class="logo-icon grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 text-white shadow-soft">
+          <i class="fa-solid fa-tooth text-lg" aria-hidden="true"></i>
+        </span>
+        <span class="text-xl font-extrabold tracking-tight">
+          Sonrisa <span class="text-brand-600">Vital</span>
+        </span>
+      </a>
+
+      <!-- Enlaces (escritorio) -->
+      <ul class="hidden items-center gap-8 text-sm font-semibold text-slate-600 md:flex">
+        <li><a href="#servicios" class="nav-link hover:text-brand-700">Servicios</a></li>
+        <li><a href="#nosotros" class="nav-link hover:text-brand-700">Nosotros</a></li>
+        <li><a href="#ubicacion" class="nav-link hover:text-brand-700">Ubicación</a></li>
+      </ul>
+
+      <!-- CTA + menú móvil -->
+      <div class="flex items-center gap-2">
+        <a href="https://wa.me/573001234567" data-whatsapp target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 rounded-full bg-brand-700 px-4 py-2.5 text-sm font-bold text-white shadow-soft transition duration-300 hover:scale-105 hover:bg-brand-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600">
+          <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+          <span>Agendar<span class="hidden sm:inline"> Cita</span></span>
+        </a>
+
+        <button id="menu-toggle" type="button"
+                class="grid h-10 w-10 place-items-center rounded-xl text-slate-700 transition hover:bg-slate-100 md:hidden"
+                aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú">
+          <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="hidden border-t border-slate-100 bg-white/95 backdrop-blur-lg md:hidden">
+      <ul class="space-y-1 px-4 py-4 text-base font-semibold text-slate-700">
+        <li><a href="#servicios" class="block rounded-xl px-4 py-3 hover:bg-brand-50 hover:text-brand-700">Servicios</a></li>
+        <li><a href="#nosotros" class="block rounded-xl px-4 py-3 hover:bg-brand-50 hover:text-brand-700">Nosotros</a></li>
+        <li><a href="#ubicacion" class="block rounded-xl px-4 py-3 hover:bg-brand-50 hover:text-brand-700">Ubicación</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- =====================================================================
+         HERO
+         ===================================================================== -->
+    <section id="inicio" class="relative overflow-hidden bg-gradient-to-b from-brand-50 via-white to-white pt-28 pb-16 sm:pt-32 lg:pt-40 lg:pb-24">
+      <!-- Blobs decorativos -->
+      <div class="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-brand-500/20 blur-3xl" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute top-1/2 -left-32 h-80 w-80 rounded-full bg-wa-400/10 blur-3xl" aria-hidden="true"></div>
+
+      <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+
+        <!-- Copy -->
+        <div class="text-center lg:text-left">
+          <!-- Social proof -->
+          <div class="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur">
+            <span class="flex text-amber-400" aria-hidden="true">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </span>
+            <span><strong class="text-ink">4.9/5</strong> por más de 500 pacientes</span>
+          </div>
+
+          <h1 class="reveal text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl" style="--reveal-delay: 80ms">
+            Recupera la confianza en tu sonrisa con
+            <span class="text-gradient">odontología moderna sin dolor.</span>
+          </h1>
+
+          <p class="reveal mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-600 lg:mx-0" style="--reveal-delay: 160ms">
+            Atención especializada, tecnología avanzada y valoraciones integrales. Reserva tu cita hoy y transforma tu salud oral.
+          </p>
+
+          <div class="reveal mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start" style="--reveal-delay: 240ms">
+            <a href="https://wa.me/573001234567" data-whatsapp target="_blank" rel="noopener"
+               class="btn-wa group inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-wa-600 px-8 py-4 text-lg font-bold text-white transition duration-300 hover:scale-105 hover:bg-wa-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wa-600 sm:w-auto">
+              <i class="fa-brands fa-whatsapp text-2xl" aria-hidden="true"></i>
+              Agenda tu valoración
+            </a>
+            <a href="#servicios"
+               class="inline-flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-8 py-4 text-lg font-bold text-ink transition duration-300 hover:scale-105 hover:border-brand-600 hover:text-brand-700 sm:w-auto">
+              Ver Servicios
+              <i class="fa-solid fa-arrow-down text-sm" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <!-- Micro-beneficios -->
+          <ul class="reveal mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-600 lg:justify-start" style="--reveal-delay: 320ms">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-wa-600" aria-hidden="true"></i>Respuesta en minutos</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-wa-600" aria-hidden="true"></i>Financiación disponible</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-wa-600" aria-hidden="true"></i>Especialistas certificados</li>
+          </ul>
+        </div>
+
+        <!-- Visual -->
+        <div class="reveal relative mx-auto w-full max-w-lg lg:max-w-none" style="--reveal-delay: 200ms">
+          <div class="hero-image-frame relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-brand-100 to-brand-50 shadow-2xl shadow-brand-600/20 sm:aspect-[5/5] lg:aspect-[4/5]">
+            <img
+              src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+              alt="Paciente sonriendo con confianza durante su consulta en la clínica odontológica Sonrisa Vital"
+              class="h-full w-full object-cover"
+              width="1000" height="1250"
+              fetchpriority="high"
+              data-fallback />
+          </div>
+
+          <!-- Tarjeta flotante glass -->
+          <div class="glass float-slow absolute -bottom-6 left-4 flex items-center gap-3 rounded-2xl p-4 shadow-lg sm:left-[-1.5rem]">
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-wa-400/15 text-wa-600">
+              <i class="fa-solid fa-face-smile-beam text-2xl" aria-hidden="true"></i>
+            </span>
+            <div>
+              <p class="text-2xl font-extrabold leading-none text-ink">+500</p>
+              <p class="text-xs font-semibold text-slate-600">sonrisas transformadas</p>
+            </div>
+          </div>
+
+          <div class="glass float-slow absolute -top-4 right-4 hidden items-center gap-3 rounded-2xl p-4 shadow-lg sm:flex sm:right-[-1rem]" style="animation-delay: -3s">
+            <span class="grid h-10 w-10 place-items-center rounded-xl bg-brand-600/10 text-brand-700">
+              <i class="fa-solid fa-shield-heart text-xl" aria-hidden="true"></i>
+            </span>
+            <p class="text-sm font-bold leading-tight text-ink">100% sin dolor<br /><span class="font-medium text-slate-600">Sedación consciente</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SERVICIOS
+         ===================================================================== -->
+    <section id="servicios" class="bg-slate-50 py-20 lg:py-28" aria-labelledby="servicios-title">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <p class="text-sm font-bold uppercase tracking-widest text-brand-700">Nuestros Servicios</p>
+          <h2 id="servicios-title" class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Tratamientos diseñados para tu sonrisa</h2>
+          <p class="mt-4 text-lg text-slate-600">Soluciones integrales con diagnóstico digital, planes personalizados y resultados que se notan.</p>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <!-- Tarjeta -->
+          <article class="service-card reveal group">
+            <span class="service-icon"><i class="fa-solid fa-teeth" aria-hidden="true"></i></span>
+            <h3 class="mt-6 text-xl font-bold">Ortodoncia Invisible y Tradicional</h3>
+            <p class="mt-3 flex-1 text-slate-600">Alinea tus dientes con alineadores transparentes o brackets de última generación. Discreta, cómoda y con seguimiento digital.</p>
+            <a href="https://wa.me/573001234567" data-whatsapp data-wa-service="Ortodoncia" target="_blank" rel="noopener" class="service-link" aria-label="Saber más sobre Ortodoncia por WhatsApp">
+              Saber más <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <article class="service-card reveal group" style="--reveal-delay: 80ms">
+            <span class="service-icon"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></span>
+            <h3 class="mt-6 text-xl font-bold">Blanqueamiento Dental Láser</h3>
+            <p class="mt-3 flex-1 text-slate-600">Hasta 8 tonos más blanco en una sola sesión, sin sensibilidad y con protección del esmalte.</p>
+            <a href="https://wa.me/573001234567" data-whatsapp data-wa-service="Blanqueamiento Dental Láser" target="_blank" rel="noopener" class="service-link" aria-label="Saber más sobre Blanqueamiento Dental Láser por WhatsApp">
+              Saber más <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <article class="service-card reveal group" style="--reveal-delay: 160ms">
+            <span class="service-icon"><i class="fa-solid fa-face-smile-beam" aria-hidden="true"></i></span>
+            <h3 class="mt-6 text-xl font-bold">Diseño de Sonrisa Digital</h3>
+            <p class="mt-3 flex-1 text-slate-600">Visualiza tu nueva sonrisa antes de empezar. Carillas y estética dental planificadas en 3D a tu medida.</p>
+            <a href="https://wa.me/573001234567" data-whatsapp data-wa-service="Diseño de Sonrisa Digital" target="_blank" rel="noopener" class="service-link" aria-label="Saber más sobre Diseño de Sonrisa Digital por WhatsApp">
+              Saber más <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+
+          <article class="service-card reveal group" style="--reveal-delay: 240ms">
+            <span class="service-icon"><i class="fa-solid fa-tooth" aria-hidden="true"></i></span>
+            <h3 class="mt-6 text-xl font-bold">Implantes y Cirugía Guiada</h3>
+            <p class="mt-3 flex-1 text-slate-600">Recupera piezas perdidas con implantes de titanio colocados mediante cirugía guiada por computador: precisa y mínimamente invasiva.</p>
+            <a href="https://wa.me/573001234567" data-whatsapp data-wa-service="Implantes y Cirugía Guiada" target="_blank" rel="noopener" class="service-link" aria-label="Saber más sobre Implantes y Cirugía Guiada por WhatsApp">
+              Saber más <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         POR QUÉ ELEGIRNOS
+         ===================================================================== -->
+    <section id="nosotros" class="relative overflow-hidden py-20 lg:py-28" aria-labelledby="nosotros-title">
+      <div class="pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full bg-brand-500/10 blur-3xl" aria-hidden="true"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <p class="text-sm font-bold uppercase tracking-widest text-brand-700">Por qué elegirnos</p>
+          <h2 id="nosotros-title" class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Tu tranquilidad es nuestra especialidad</h2>
+          <p class="mt-4 text-lg text-slate-600">Combinamos tecnología de punta con un trato humano para que cada visita sea cómoda y segura.</p>
+        </div>
+
+        <div class="mt-14 grid gap-6 md:grid-cols-3">
+          <article class="feature-card reveal">
+            <span class="feature-icon bg-brand-600/10 text-brand-700"><i class="fa-solid fa-cube" aria-hidden="true"></i></span>
+            <h3 class="mt-6 text-xl font-bold">Tecnología de última generación</h3>
+            <p class="mt-3 text-slate-600">Escáner intraoral 3D, radiografía digital de baja radiación y diagnóstico preciso sin moldes incómodos.</p>
+            <p class="mt-6 border-t border-slate-100 pt-6">
+              <span class="text-4xl font-extrabold text-brand-700"><span data-counter="3">0</span>D</span>
+              <span class="ml-2 text-sm font-semibold text-slate-600">diagnóstico digital</span>
+            </p>
+          </article>
+
+          <article class="feature-card reveal" style="--reveal-delay: 100ms">
+            <span class="feature-icon bg-wa-400/15 text-wa-700"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i></span>
+            <h3 class="mt-6 text-xl font-bold">Atención 100% sin dolor</h3>
+            <p class="mt-3 text-slate-600">Anestesia computarizada, técnicas avanzadas y sedación consciente para pacientes con ansiedad dental.</p>
+            <p class="mt-6 border-t border-slate-100 pt-6">
+              <span class="text-4xl font-extrabold text-wa-700"><span data-counter="100">0</span>%</span>
+              <span class="ml-2 text-sm font-semibold text-slate-600">confort garantizado</span>
+            </p>
+          </article>
+
+          <article class="feature-card reveal" style="--reveal-delay: 200ms">
+            <span class="feature-icon bg-amber-400/15 text-amber-700"><i class="fa-solid fa-award" aria-hidden="true"></i></span>
+            <h3 class="mt-6 text-xl font-bold">Garantía y Experiencia</h3>
+            <p class="mt-3 text-slate-600">Profesionales certificados y especialistas con años de experiencia. Todos nuestros tratamientos tienen garantía.</p>
+            <p class="mt-6 border-t border-slate-100 pt-6">
+              <span class="text-4xl font-extrabold text-amber-700">+<span data-counter="500">0</span></span>
+              <span class="ml-2 text-sm font-semibold text-slate-600">sonrisas transformadas</span>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         UBICACIÓN, HORARIOS Y CONTACTO
+         ===================================================================== -->
+    <section id="ubicacion" class="bg-slate-50 py-20 lg:py-28" aria-labelledby="ubicacion-title">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <p class="text-sm font-bold uppercase tracking-widest text-brand-700">Ubicación y Contacto</p>
+          <h2 id="ubicacion-title" class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Visítanos en Bogotá</h2>
+          <p class="mt-4 text-lg text-slate-600">Estamos en una zona central, con parqueadero y fácil acceso en transporte público.</p>
+        </div>
+
+        <div class="mt-14 grid gap-8 lg:grid-cols-2">
+          <!-- Info -->
+          <div class="reveal flex flex-col gap-4">
+            <div class="info-card">
+              <span class="info-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+              <div>
+                <h3 class="font-bold">Dirección</h3>
+                <address class="mt-1 not-italic text-slate-600">Calle 123 #45-67, Edificio Médico, Consultorio 402<br />Bogotá, Colombia</address>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <span class="info-icon"><i class="fa-regular fa-clock" aria-hidden="true"></i></span>
+              <div class="w-full">
+                <h3 class="font-bold">Horarios de atención</h3>
+                <dl class="mt-2 space-y-1 text-slate-600">
+                  <div class="flex justify-between gap-4"><dt>Lunes a Viernes</dt><dd class="font-semibold text-ink">8:00 am – 6:00 pm</dd></div>
+                  <div class="flex justify-between gap-4"><dt>Sábados</dt><dd class="font-semibold text-ink">9:00 am – 1:00 pm</dd></div>
+                  <div class="flex justify-between gap-4"><dt>Domingos y festivos</dt><dd class="font-semibold text-slate-500">Cerrado</dd></div>
+                </dl>
+                <p id="open-status" class="mt-3 hidden items-center gap-2 text-sm font-bold" aria-live="polite"></p>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <span class="info-icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></span>
+              <div>
+                <h3 class="font-bold">Teléfono directo</h3>
+                <a href="tel:+573001234567" class="mt-1 inline-block text-lg font-semibold text-brand-700 hover:underline">+57 300 123 4567</a>
+              </div>
+            </div>
+
+            <a href="https://wa.me/573001234567" data-whatsapp target="_blank" rel="noopener"
+               class="btn-wa mt-2 inline-flex items-center justify-center gap-3 rounded-2xl bg-wa-600 px-8 py-4 text-lg font-bold text-white transition duration-300 hover:scale-[1.02] hover:bg-wa-700">
+              <i class="fa-brands fa-whatsapp text-2xl" aria-hidden="true"></i>
+              Escríbenos por WhatsApp
+            </a>
+          </div>
+
+          <!-- Mapa -->
+          <div class="reveal map-frame relative min-h-[360px] overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-lg" style="--reveal-delay: 120ms">
+            <iframe
+              title="Mapa de ubicación de Sonrisa Vital en Bogotá"
+              src="https://www.google.com/maps?q=Bogot%C3%A1%2C%20Colombia&z=15&output=embed"
+              class="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen></iframe>
+
+            <!-- Pin personalizado + tarjeta -->
+            <div class="pointer-events-none absolute inset-0 grid place-items-center" aria-hidden="true">
+              <div class="map-pin">
+                <span class="map-pin-pulse"></span>
+                <span class="map-pin-head"><i class="fa-solid fa-tooth"></i></span>
+              </div>
+            </div>
+            <div class="glass absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4 rounded-2xl p-4 shadow-lg sm:right-auto">
+              <div>
+                <p class="font-bold text-ink">Sonrisa Vital</p>
+                <p class="text-sm text-slate-600">Calle 123 #45-67, Bogotá</p>
+              </div>
+              <a href="https://www.google.com/maps/search/?api=1&query=Calle+123+45-67+Bogota" target="_blank" rel="noopener"
+                 class="shrink-0 rounded-xl bg-brand-700 px-4 py-2 text-sm font-bold text-white transition hover:bg-brand-800">
+                Cómo llegar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         CTA FINAL
+         ===================================================================== -->
+    <section class="px-4 py-20 sm:px-6 lg:px-8" aria-labelledby="cta-title">
+      <div class="reveal relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-brand-700 via-brand-800 to-[#0e4f6e] px-6 py-16 text-center text-white shadow-2xl shadow-brand-700/30 sm:px-12 lg:py-20">
+        <div class="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full bg-white/10 blur-2xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -bottom-24 -right-10 h-80 w-80 rounded-full bg-brand-500/40 blur-3xl" aria-hidden="true"></div>
+
+        <div class="relative">
+          <h2 id="cta-title" class="mx-auto max-w-3xl text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+            Tu salud dental no puede esperar
+          </h2>
+          <p class="mx-auto mt-6 max-w-2xl text-lg text-sky-100">
+            Un pequeño problema hoy puede convertirse en un tratamiento complejo mañana. Agenda tu valoración integral y recibe un plan claro, sin compromiso.
+          </p>
+          <a href="https://wa.me/573001234567" data-whatsapp target="_blank" rel="noopener"
+             class="btn-wa mt-10 inline-flex items-center justify-center gap-3 rounded-2xl bg-wa-400 px-10 py-5 text-lg font-extrabold text-slate-900 transition duration-300 hover:scale-105 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+            <i class="fa-brands fa-whatsapp text-2xl" aria-hidden="true"></i>
+            Quiero agendar mi valoración
+          </a>
+          <p class="mt-4 text-sm text-sky-100">Respuesta promedio: menos de 10 minutos en horario de atención.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       FOOTER
+       ===================================================================== -->
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 py-10 sm:px-6 md:flex-row md:justify-between lg:px-8">
+      <a href="#inicio" class="flex items-center gap-2" aria-label="Sonrisa Vital, volver al inicio">
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-600 text-white">
+          <i class="fa-solid fa-tooth" aria-hidden="true"></i>
+        </span>
+        <span class="font-extrabold">Sonrisa <span class="text-brand-600">Vital</span></span>
+      </a>
+
+      <nav aria-label="Enlaces legales">
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-slate-600">
+          <li><a href="#" class="hover:text-brand-700">Política de Privacidad</a></li>
+          <li><a href="#" class="hover:text-brand-700">Tratamiento de Datos</a></li>
+          <li><a href="#" class="hover:text-brand-700">Términos y Condiciones</a></li>
+        </ul>
+      </nav>
+
+      <ul class="flex gap-3" aria-label="Redes sociales">
+        <li><a href="#" class="social-link" aria-label="Instagram de Sonrisa Vital"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+        <li><a href="#" class="social-link" aria-label="Facebook de Sonrisa Vital"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+        <li><a href="#" class="social-link" aria-label="TikTok de Sonrisa Vital"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a></li>
+      </ul>
+    </div>
+    <p class="border-t border-slate-100 py-6 text-center text-sm text-slate-500">
+      © <span id="year">2026</span> Sonrisa Vital – Clínica Odontológica. Todos los derechos reservados.
+    </p>
+  </footer>
+
+  <!-- =====================================================================
+       BOTÓN FLOTANTE DE WHATSAPP
+       ===================================================================== -->
+  <div class="fixed bottom-6 right-6 z-50 flex items-end gap-3">
+    <div id="wa-tooltip" role="status"
+         class="wa-tooltip relative mb-2 max-w-[14rem] rounded-2xl bg-white px-4 py-3 pr-9 text-sm font-semibold text-ink shadow-xl ring-1 ring-slate-200">
+      ¿Necesitas ayuda? ¡Escríbenos!
+      <button id="wa-tooltip-close" type="button" class="absolute right-2 top-2 grid h-6 w-6 place-items-center rounded-full text-slate-500 hover:bg-slate-100" aria-label="Cerrar mensaje">
+        <i class="fa-solid fa-xmark text-xs" aria-hidden="true"></i>
+      </button>
+    </div>
+    <a href="https://wa.me/573001234567" data-whatsapp target="_blank" rel="noopener"
+       class="wa-float grid h-16 w-16 place-items-center rounded-full bg-wa-400 text-white shadow-xl transition duration-300 hover:scale-110 hover:bg-wa-600"
+       aria-label="Chatear con Sonrisa Vital por WhatsApp">
+      <i class="fa-brands fa-whatsapp text-4xl" aria-hidden="true"></i>
+    </a>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

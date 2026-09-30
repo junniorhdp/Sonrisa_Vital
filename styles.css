@@ -1,0 +1,368 @@
+/* =========================================================================
+   Sonrisa Vital – Estilos personalizados
+   -------------------------------------------------------------------------
+   Tailwind (CDN) cubre el layout y las utilidades. Este archivo contiene lo
+   que Tailwind vía CDN no procesa (@apply no funciona en hojas externas):
+   componentes reutilizables, glassmorphism, animaciones y efectos reveal.
+   ========================================================================= */
+
+:root {
+  --brand-500: #0891b2;
+  --brand-600: #0284c7;
+  --brand-700: #0369a1;
+  --wa-400: #25d366;
+  --wa-600: #128c7e;
+  --ink: #1e293b;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Compensa el header fijo al saltar a anclas */
+html {
+  scroll-padding-top: 88px;
+}
+
+/* ---------- Navbar: estado al hacer scroll ---------- */
+#navbar.is-scrolled {
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06), 0 8px 24px -12px rgba(15, 23, 42, 0.12);
+}
+
+.nav-link {
+  position: relative;
+  transition: color 300ms var(--ease);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  background: var(--brand-600);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms var(--ease);
+}
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+.nav-link.is-active {
+  color: var(--brand-700);
+}
+
+/* Ícono del logo: pequeño "wiggle" al pasar el cursor */
+.group:hover .logo-icon {
+  animation: wiggle 600ms var(--ease);
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-12deg) scale(1.08); }
+  50% { transform: rotate(10deg) scale(1.08); }
+  75% { transform: rotate(-4deg) scale(1.04); }
+}
+
+/* ---------- Texto con gradiente (H1) ---------- */
+.text-gradient {
+  background: linear-gradient(100deg, var(--brand-600) 0%, var(--brand-500) 55%, var(--wa-600) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Glassmorphism ---------- */
+.glass {
+  background: rgba(255, 255, 255, 0.78);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+/* Máscara suave de la imagen hero */
+.hero-image-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(180deg, transparent 60%, rgba(3, 105, 161, 0.18) 100%);
+  pointer-events: none;
+}
+/* Fallback si la imagen no carga */
+.hero-image-frame.img-failed img { display: none; }
+.hero-image-frame.img-failed::before {
+  content: "\f5c9"; /* fa-tooth */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 6rem;
+  color: rgba(2, 132, 199, 0.35);
+}
+
+/* Tarjetas flotantes */
+.float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ---------- Botones WhatsApp: glow ---------- */
+.btn-wa {
+  box-shadow: 0 10px 30px -10px rgba(18, 140, 126, 0.55);
+}
+.btn-wa:hover {
+  box-shadow: 0 0 0 6px rgba(37, 211, 102, 0.18), 0 16px 40px -10px rgba(37, 211, 102, 0.6);
+}
+
+/* ---------- Tarjetas de servicio (neomorfismo suave) ---------- */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: #fff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 8px 8px 24px rgba(148, 163, 184, 0.14), -8px -8px 24px rgba(255, 255, 255, 0.9);
+  transition: transform 300ms var(--ease), box-shadow 300ms var(--ease), border-color 300ms var(--ease);
+}
+.service-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(2, 132, 199, 0.3);
+  box-shadow: 0 24px 48px -16px rgba(2, 132, 199, 0.28);
+}
+
+.service-icon {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  color: var(--brand-700);
+  background: linear-gradient(135deg, #e0f2fe, #cffafe);
+  transition: transform 300ms var(--ease), background 300ms var(--ease), color 300ms var(--ease);
+}
+.service-card:hover .service-icon {
+  color: #fff;
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-weight: 700;
+  color: var(--brand-700);
+}
+.service-link i {
+  font-size: 0.8em;
+  transition: transform 300ms var(--ease);
+}
+.service-link:hover i,
+.service-card:hover .service-link i {
+  transform: translateX(4px);
+}
+
+/* ---------- Diferenciadores ---------- */
+.feature-card {
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: transform 300ms var(--ease), box-shadow 300ms var(--ease);
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -18px rgba(15, 23, 42, 0.2);
+}
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+}
+
+/* ---------- Ubicación ---------- */
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: box-shadow 300ms var(--ease), transform 300ms var(--ease);
+}
+.info-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 12px 28px -14px rgba(2, 132, 199, 0.3);
+}
+.info-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.875rem;
+  font-size: 1.25rem;
+  color: var(--brand-700);
+  background: #e0f2fe;
+}
+
+/* Mapa estilizado: tono frío que combina con la marca */
+.map-frame iframe {
+  filter: grayscale(0.55) contrast(1.05) hue-rotate(-8deg);
+  transition: filter 400ms var(--ease);
+}
+.map-frame:hover iframe {
+  filter: none;
+}
+
+.map-pin {
+  position: relative;
+  transform: translateY(-24px);
+}
+.map-pin-head {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+  border: 3px solid #fff;
+  box-shadow: 0 10px 24px -6px rgba(3, 105, 161, 0.6);
+  color: #fff;
+  animation: pin-drop 900ms var(--ease) both;
+}
+.map-pin-head i {
+  transform: rotate(45deg);
+}
+.map-pin-pulse {
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  width: 1.25rem;
+  height: 0.5rem;
+  margin-left: -0.625rem;
+  border-radius: 50%;
+  background: rgba(3, 105, 161, 0.5);
+  animation: pin-pulse 2s ease-out infinite;
+}
+@keyframes pin-drop {
+  0% { opacity: 0; translate: 0 -40px; }
+  60% { opacity: 1; translate: 0 4px; }
+  100% { translate: 0 0; }
+}
+@keyframes pin-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* ---------- Footer ---------- */
+.social-link {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  color: #475569;
+  background: #f1f5f9;
+  transition: transform 300ms var(--ease), background 300ms var(--ease), color 300ms var(--ease);
+}
+.social-link:hover {
+  transform: scale(1.1);
+  color: #fff;
+  background: var(--brand-700);
+}
+
+/* ---------- Botón flotante WhatsApp ---------- */
+.wa-float {
+  position: relative;
+  animation: wa-pulse 2.4s ease-out infinite;
+}
+@keyframes wa-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55), 0 12px 28px -8px rgba(18, 140, 126, 0.6); }
+  70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0), 0 12px 28px -8px rgba(18, 140, 126, 0.6); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 12px 28px -8px rgba(18, 140, 126, 0.6); }
+}
+
+.wa-tooltip {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px) scale(0.96);
+  transform-origin: bottom right;
+  transition: opacity 300ms var(--ease), transform 300ms var(--ease), visibility 300ms;
+}
+.wa-tooltip.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+/* "Colita" del globo apuntando al botón */
+.wa-tooltip::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  bottom: 14px;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  transform: rotate(45deg);
+  box-shadow: 1px -1px 0 rgba(226, 232, 240, 1);
+}
+
+/* ---------- Reveal on scroll ----------
+   Solo se ocultan si JS está activo (clase .js en <html>), así el contenido
+   sigue siendo visible sin JavaScript o para crawlers. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* Las tarjetas con hover propio recuperan su transición rápida tras aparecer */
+.js .service-card.reveal.is-visible,
+.js .feature-card.reveal.is-visible {
+  transition: opacity 700ms var(--ease), transform 300ms var(--ease), box-shadow 300ms var(--ease), border-color 300ms var(--ease);
+  transition-delay: 0ms;
+}
+
+/* ---------- Accesibilidad: movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js .reveal { opacity: 1; transform: none; }
+}
+
+/* Foco visible consistente para teclado */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--brand-600);
+  outline-offset: 3px;
+  border-radius: 0.75rem;
+}
